@@ -33,7 +33,7 @@ public class MySqlProductDao extends MySqlDaoBase implements ProductDao
         if (maxPrice != null)
             sql.append(" AND price <= ?");
         if (color != null && !color.isBlank())
-            sql.append(" AND color = ?");
+            sql.append(" AND LOWER(color) = ?");
 
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(sql.toString()))
@@ -47,7 +47,7 @@ public class MySqlProductDao extends MySqlDaoBase implements ProductDao
             if (maxPrice != null)
                 statement.setBigDecimal(paramIndex++, maxPrice);
             if (color != null && !color.isBlank())
-                statement.setString(paramIndex++, color);
+                statement.setString(paramIndex++, color.toLowerCase());
 
             ResultSet row = statement.executeQuery();
 
