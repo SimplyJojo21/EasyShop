@@ -17,7 +17,7 @@ public class Category
         this.description = description;
     }
 
-    public int getCategoryId()
+    public int GetCategoryId()
     {
         return categoryId;
     }
